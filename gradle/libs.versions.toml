@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.0"
+fragmentKtx = "1.8.2"
 hiltAndroid = "2.50"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
@@ -50,6 +51,9 @@ androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-lived
 
 # Lottie file
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+
+# Fragment
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

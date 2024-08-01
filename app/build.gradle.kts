@@ -74,6 +74,9 @@ dependencies {
 
     // LottieFile
     implementation(libs.lottie)
+
+    // Fragment
+    implementation(libs.androidx.fragment.ktx)
 }
 
 kapt {
