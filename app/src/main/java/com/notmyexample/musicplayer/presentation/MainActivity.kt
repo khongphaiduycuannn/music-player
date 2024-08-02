@@ -1,7 +1,11 @@
 package com.notmyexample.musicplayer.presentation
 
+import android.Manifest.permission.POST_NOTIFICATIONS
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest.permission.READ_MEDIA_AUDIO
 import android.content.Context
 import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -17,12 +21,13 @@ import com.notmyexample.musicplayer.presentation.navigator.AppNavigator
 import com.notmyexample.musicplayer.presentation.navigator.Screens
 import com.notmyexample.musicplayer.presentation.navigator.Screens.ALBUM
 import com.notmyexample.musicplayer.presentation.navigator.Screens.DETAIL_ALBUM
-import com.notmyexample.musicplayer.presentation.navigator.Screens.DETAIL_SONG
 import com.notmyexample.musicplayer.presentation.navigator.Screens.FAVOURITE
 import com.notmyexample.musicplayer.presentation.navigator.Screens.HOME
 import com.notmyexample.musicplayer.presentation.navigator.Screens.PLAY
 import com.notmyexample.musicplayer.presentation.navigator.Screens.SEARCH
 import com.notmyexample.musicplayer.presentation.navigator.Screens.SONGS
+import com.notmyexample.musicplayer.utils.requestPermission
+import com.notmyexample.musicplayer.utils.requestPermissions
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -40,9 +45,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        appNavigator.navigateTo(HOME)
-
+        requestPermissions()
+        initView()
         handleEvent()
+    }
+
+    private fun initView() {
+        appNavigator.navigateTo(HOME)
     }
 
     private fun handleEvent() {
@@ -56,18 +65,13 @@ class MainActivity : AppCompatActivity() {
     fun updateBottomNavigationBar(screen: Screens) {
         clearBottomNavigationButtonState()
         when (screen) {
-            HOME, ALBUM, SONGS, DETAIL_ALBUM, DETAIL_SONG -> {
+            HOME, ALBUM, DETAIL_ALBUM -> {
                 binding.ivHome.setImageDrawable(getDrawable(this, R.drawable.ic_home_selected))
                 binding.tvHome.setTextColor(getColor(R.color.black))
             }
 
             FAVOURITE -> {
-                binding.ivFavourite.setImageDrawable(
-                    getDrawable(
-                        this,
-                        R.drawable.ic_favourite_selected
-                    )
-                )
+                binding.ivFavourite.setImageDrawable(getDrawable(this, R.drawable.ic_favourite_fill_selected))
                 binding.tvFavourite.setTextColor(getColor(R.color.black))
             }
 
@@ -76,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                 binding.tvSearch.setTextColor(getColor(R.color.black))
             }
 
-            PLAY -> {
+            PLAY, SONGS -> {
                 binding.lnlBottomNavigationBar.visibility = View.GONE
             }
         }
@@ -88,11 +92,19 @@ class MainActivity : AppCompatActivity() {
         binding.ivHome.setImageDrawable(getDrawable(this, R.drawable.ic_home))
         binding.tvHome.setTextColor(getColor(R.color.gray600))
 
-        binding.ivFavourite.setImageDrawable(getDrawable(this, R.drawable.ic_favourite))
+        binding.ivFavourite.setImageDrawable(getDrawable(this, R.drawable.ic_favourite_fill))
         binding.tvFavourite.setTextColor(getColor(R.color.gray600))
 
         binding.ivSearch.setImageDrawable(getDrawable(this, R.drawable.ic_search))
         binding.tvSearch.setTextColor(getColor(R.color.gray600))
+    }
+
+    private fun requestPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissions(arrayOf(POST_NOTIFICATIONS, READ_MEDIA_AUDIO))
+        } else {
+            requestPermission(READ_EXTERNAL_STORAGE)
+        }
     }
 
     private fun setOnBackPressed() {
