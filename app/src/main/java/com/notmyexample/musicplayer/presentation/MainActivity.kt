@@ -15,10 +15,14 @@ import com.notmyexample.musicplayer.R
 import com.notmyexample.musicplayer.databinding.ActivityMainBinding
 import com.notmyexample.musicplayer.presentation.navigator.AppNavigator
 import com.notmyexample.musicplayer.presentation.navigator.Screens
+import com.notmyexample.musicplayer.presentation.navigator.Screens.ALBUM
+import com.notmyexample.musicplayer.presentation.navigator.Screens.DETAIL_ALBUM
+import com.notmyexample.musicplayer.presentation.navigator.Screens.DETAIL_SONG
 import com.notmyexample.musicplayer.presentation.navigator.Screens.FAVOURITE
 import com.notmyexample.musicplayer.presentation.navigator.Screens.HOME
 import com.notmyexample.musicplayer.presentation.navigator.Screens.PLAY
 import com.notmyexample.musicplayer.presentation.navigator.Screens.SEARCH
+import com.notmyexample.musicplayer.presentation.navigator.Screens.SONGS
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -52,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     fun updateBottomNavigationBar(screen: Screens) {
         clearBottomNavigationButtonState()
         when (screen) {
-            HOME -> {
+            HOME, ALBUM, SONGS, DETAIL_ALBUM, DETAIL_SONG -> {
                 binding.ivHome.setImageDrawable(getDrawable(this, R.drawable.ic_home_selected))
                 binding.tvHome.setTextColor(getColor(R.color.black))
             }
@@ -82,13 +86,13 @@ class MainActivity : AppCompatActivity() {
         binding.lnlBottomNavigationBar.visibility = View.VISIBLE
 
         binding.ivHome.setImageDrawable(getDrawable(this, R.drawable.ic_home))
-        binding.tvHome.setTextColor(getColor(R.color.gray_600))
+        binding.tvHome.setTextColor(getColor(R.color.gray600))
 
         binding.ivFavourite.setImageDrawable(getDrawable(this, R.drawable.ic_favourite))
-        binding.tvFavourite.setTextColor(getColor(R.color.gray_600))
+        binding.tvFavourite.setTextColor(getColor(R.color.gray600))
 
         binding.ivSearch.setImageDrawable(getDrawable(this, R.drawable.ic_search))
-        binding.tvSearch.setTextColor(getColor(R.color.gray_600))
+        binding.tvSearch.setTextColor(getColor(R.color.gray600))
     }
 
     private fun setOnBackPressed() {

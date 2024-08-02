@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/home"
-                android:textColor="@color/gray_600" />
+                android:textColor="@color/gray600" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/search"
-                android:textColor="@color/gray_600" />
+                android:textColor="@color/gray600" />
         </LinearLayout>
 
         <LinearLayout
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/favourite"
-                android:textColor="@color/gray_600" />
+                android:textColor="@color/gray600" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
