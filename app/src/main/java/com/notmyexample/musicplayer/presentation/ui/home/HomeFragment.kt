@@ -13,7 +13,6 @@ import com.notmyexample.musicplayer.presentation.navigator.AppNavigator
 import com.notmyexample.musicplayer.presentation.navigator.Screens.ALBUM
 import com.notmyexample.musicplayer.presentation.navigator.Screens.DETAIL_ALBUM
 import com.notmyexample.musicplayer.presentation.navigator.Screens.HOME
-import com.notmyexample.musicplayer.presentation.navigator.Screens.SONGS
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -34,12 +33,7 @@ class HomeFragment : Fragment() {
         bundle.putSerializable("Album", it)
         appNavigator.navigateTo(DETAIL_ALBUM, bundle)
     }
-
-    private val songAdapter = SongAdapter {
-        val bundle = Bundle()
-        bundle.putSerializable("Song", it)
-        appNavigator.navigateTo(DETAIL_ALBUM, bundle)
-    }
+    private val songAdapter = SongAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,32 +51,27 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView() {
-        binding.rclSongsList.adapter = songAdapter
-        binding.rclSongsList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
         binding.rclAlbumsList.adapter = albumAdapter
         binding.rclAlbumsList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        binding.rclSongsList.adapter = songAdapter
+        binding.rclSongsList.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun handleEvent() {
         binding.tvShowMoreAlbum.setOnClickListener {
             appNavigator.navigateTo(ALBUM)
         }
-
-        binding.tvShowMoreSong.setOnClickListener {
-            appNavigator.navigateTo(SONGS)
-        }
     }
 
     private fun observeData() {
-        viewModel.songs.observe(viewLifecycleOwner) {
-            songAdapter.setSongs(it.take(5).toMutableList())
-        }
-
         viewModel.albums.observe(viewLifecycleOwner) {
             albumAdapter.setAlbums(it.take(5).toMutableList())
+        }
+
+        viewModel.songs.observe(viewLifecycleOwner) {
+            songAdapter.setSongs(it.toMutableList())
         }
     }
 }

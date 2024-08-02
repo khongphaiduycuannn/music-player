@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnlSong"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_btn_bottom_nav_ripple"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/_10sdp"
+    android:paddingVertical="@dimen/_4sdp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/ivThumbnail"
+        android:layout_width="@dimen/_49sdp"
+        android:layout_height="@dimen/_49sdp"
+        android:layout_marginVertical="@dimen/_3sdp"
+        android:scaleType="center"
+        app:riv_border_color="@color/gray400"
+        app:riv_border_width="0.5dp"
+        app:riv_corner_radius="@dimen/_3sdp"
+        tools:src="@drawable/img_thumbnail_1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginVertical="@dimen/_4sdp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/_1sdp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            tools:text="Mèo hoang" />
+
+        <TextView
+            android:id="@+id/tvAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/_1sdp"
+            android:layout_weight="1"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textColor="@color/gray600"
+            android:textSize="@dimen/_9ssp"
+            tools:text="Ngọt" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/_1sdp"
+            android:layout_weight="1"
+            android:gravity="start|center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivIsPlaying"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:src="@drawable/ic_play" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_2sdp"
+                android:layout_marginVertical="@dimen/_1sdp"
+                android:fontFamily="@font/nunito"
+                android:maxLines="1"
+                android:textColor="@color/gray600"
+                android:textSize="@dimen/_7ssp"
+                tools:text="Not play" />
+
+            <TextView
+                android:id="@+id/tvDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_2sdp"
+                android:layout_marginVertical="@dimen/_1sdp"
+                android:fontFamily="@font/nunito"
+                android:maxLines="1"
+                android:textColor="@color/gray600"
+                android:textSize="@dimen/_7ssp"
+                tools:text="4:10" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
