@@ -56,17 +56,6 @@
             app:riv_border_width="@dimen/_1sdp"
             app:riv_corner_radius="@dimen/_5sdp"
             tools:src="@drawable/img_thumbnail_1" />
-
-        <ImageView
-            android:id="@+id/ivIsPlaying"
-            android:layout_width="@dimen/_12sdp"
-            android:layout_height="@dimen/_12sdp"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:elevation="@dimen/_4sdp"
-            android:src="@drawable/ic_pause"
-            android:visibility="gone" />
     </FrameLayout>
 
     <TextView

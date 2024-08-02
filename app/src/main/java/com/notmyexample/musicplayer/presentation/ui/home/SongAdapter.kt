@@ -6,11 +6,8 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.notmyexample.musicplayer.data.model.Song
-import com.notmyexample.musicplayer.databinding.ItemHomeSongBinding
-import com.notmyexample.musicplayer.utils.darkenColor
+import com.notmyexample.musicplayer.databinding.ItemSongBinding
 import com.notmyexample.musicplayer.utils.formatTime
-import com.notmyexample.musicplayer.utils.getDominantColor
-import com.notmyexample.musicplayer.utils.lighterColor
 
 class SongAdapter(
     val onClick: (Song) -> Unit = {}
@@ -18,28 +15,22 @@ class SongAdapter(
 
     private val songs = mutableListOf<Song>()
 
-    inner class SongViewHolder(val binding: ItemHomeSongBinding) : ViewHolder(binding.root) {
+    inner class SongViewHolder(val binding: ItemSongBinding) : ViewHolder(binding.root) {
 
         fun onBind(item: Song) {
-            binding.tvSongName.text = item.name
+            binding.tvName.text = item.name
+            binding.tvAuthor.text = item.author
             binding.tvDuration.text = formatTime(item.duration)
             Glide.with(binding.ivThumbnail.context).load(item.thumbnail).into(binding.ivThumbnail)
-
-            item.thumbnail?.let {
-                val color = getDominantColor(it)
-                binding.ivTopBackground.setBackgroundColor(darkenColor(color))
-                binding.ivBottomBackground.setBackgroundColor(lighterColor(color))
-            }
         }
 
         fun handleEvent(item: Song) {
-            binding.lnlHomeSong.setOnClickListener { onClick(item) }
+            binding.lnlSong.setOnClickListener { onClick(item) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
-        val binding =
-            ItemHomeSongBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemSongBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SongViewHolder(binding)
     }
 
