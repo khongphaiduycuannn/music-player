@@ -21,6 +21,6 @@ class SearchFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (activity as MainActivity).updateBottomNavigationBar(Screens.SEARCH)
+        (activity as MainActivity).updateBottomBar(Screens.SEARCH)
     }
 }

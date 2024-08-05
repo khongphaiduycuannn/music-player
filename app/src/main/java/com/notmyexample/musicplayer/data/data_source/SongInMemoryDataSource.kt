@@ -11,12 +11,43 @@ class SongInMemoryDataSource(
     val context: Context
 ) : SongDataSource {
 
-    override suspend fun getSongs(): List<Song> {
-        return listOf(
-            Song(1, "Mèo hoang", "Ngọt", 250000, defaultThumbnailList[0], Uri.EMPTY, false, 1),
-            Song(2, "Mai mình xa", "Thịnh Suy", 250000, defaultThumbnailList[1], Uri.EMPTY, false, 2),
-            Song(3, "Phút ban đầu", "Vũ.", 250000, defaultThumbnailList[2], Uri.EMPTY, false, 3),
+    private val songs by lazy {
+        listOf(
+            Song(
+                1,
+                "Mèo hoang",
+                "Ngọt",
+                301349,
+                defaultThumbnailList[0],
+                Uri.parse("content://media/external/audio/media/1000000041"),
+                false,
+                1
+            ),
+            Song(
+                2,
+                "Người gieo mầm xanh",
+                "Hoàng Dũng",
+                240562,
+                defaultThumbnailList[1],
+                Uri.parse("content://media/external/audio/media/1000000043"),
+                false,
+                2
+            ),
+            Song(
+                3,
+                "Mai mình xa",
+                "Thịnh Suy",
+                189362,
+                defaultThumbnailList[2],
+                Uri.parse("content://media/external/audio/media/1000000040"),
+                false,
+                3
+            ),
         )
+    }
+
+    override suspend fun getSongs(): List<Song> {
+        return songs
     }
 
     override suspend fun getAlbums(): List<Album> {
@@ -25,6 +56,12 @@ class SongInMemoryDataSource(
             Album(2, "Bài hát hay nhất của Thịnh Suy", "Thịnh Suy", defaultThumbnailList[4], 1),
             Album(3, "Bài hát hay nhất của Vũ", "Vũ.", defaultThumbnailList[5], 1)
         )
+    }
+
+    override fun favouriteSong(song: Song): Boolean {
+        val result = songs.first { it.id == song.id }
+        result.isFavorite = !result.isFavorite
+        return result.isFavorite
     }
 
     private val defaultThumbnailList by lazy {

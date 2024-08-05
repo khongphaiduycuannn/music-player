@@ -21,6 +21,6 @@ class FavouriteSongFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (activity as MainActivity).updateBottomNavigationBar(Screens.FAVOURITE)
+        (activity as MainActivity).updateBottomBar(Screens.FAVOURITE)
     }
 }

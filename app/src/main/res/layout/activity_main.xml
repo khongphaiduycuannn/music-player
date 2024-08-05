@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -15,6 +16,101 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         tools:layout="@layout/fragment_home" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cslBottomPlayBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivThumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/img_thumbnail_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_80"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_7sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivPlayOrPause"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginHorizontal="@dimen/_3sdp"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/ic_play_white" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_3sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvSongName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_1sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_11ssp"
+                    tools:text="Mèo hoang" />
+
+                <TextView
+                    android:id="@+id/tvAuthor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_1sdp"
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9ssp"
+                    tools:text="Ngọt" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/nunito"
+                android:gravity="center"
+                android:text="@string/_00_00"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/_2sdp"
+                android:fontFamily="@font/nunito"
+                android:gravity="center"
+                android:text="@string/div"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp" />
+
+            <TextView
+                android:id="@+id/tvDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:fontFamily="@font/nunito"
+                android:gravity="center"
+                android:text="@string/_00_00"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/lnlBottomNavigationBar"
@@ -95,7 +191,7 @@
                 android:id="@+id/ivFavourite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_favourite" />
+                android:src="@drawable/ic_favourite_fill" />
 
             <TextView
                 android:id="@+id/tvFavourite"

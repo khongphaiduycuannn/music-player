@@ -4,6 +4,7 @@ import android.content.Context
 import com.notmyexample.musicplayer.data.data_source.SongDataSource
 import com.notmyexample.musicplayer.data.data_source.SongInMemoryDataSource
 import com.notmyexample.musicplayer.data.repository.SongRepository
+import com.notmyexample.musicplayer.use_case.song.FavouriteSong
 import com.notmyexample.musicplayer.use_case.song.GetAlbums
 import com.notmyexample.musicplayer.use_case.song.GetSongs
 import com.notmyexample.musicplayer.use_case.song.SongUseCases
@@ -35,7 +36,8 @@ class SongModule {
     fun provideSongUseCases(songRepository: SongRepository): SongUseCases {
         return SongUseCases(
             getSongs = GetSongs(songRepository),
-            getAlbums = GetAlbums(songRepository)
+            getAlbums = GetAlbums(songRepository),
+            favouriteSong = FavouriteSong(songRepository)
         )
     }
 }

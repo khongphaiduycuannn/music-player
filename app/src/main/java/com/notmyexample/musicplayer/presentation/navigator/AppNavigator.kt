@@ -1,19 +1,21 @@
 package com.notmyexample.musicplayer.presentation.navigator
 
 import android.os.Bundle
+import java.util.Stack
 
 enum class Screens {
     HOME,
     FAVOURITE,
     DETAIL_ALBUM,
-    DETAIL_SONG,
     PLAY,
-    SEARCH,
-    ALBUM,
     SONGS,
+    SEARCH,
+    ALBUM
 }
 
 interface AppNavigator {
+
+    fun getCurrentScreen(): Screens?
 
     fun navigateTo(screen: Screens)
 

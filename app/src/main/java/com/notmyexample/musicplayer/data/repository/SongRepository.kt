@@ -9,4 +9,6 @@ class SongRepository(private val songDataSource: SongDataSource) {
     suspend fun getSongs(): List<Song> = songDataSource.getSongs()
 
     suspend fun getAlbums(): List<Album> = songDataSource.getAlbums()
+
+    fun favouriteSong(song: Song): Boolean = songDataSource.favouriteSong(song)
 }

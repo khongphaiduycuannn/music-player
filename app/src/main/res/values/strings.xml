@@ -9,4 +9,11 @@
     <string name="albums">Albums</string>
     <string name="songs">Songs</string>
     <string name="show_more">Show more</string>
+    <string name="current_playlist">Current playlist</string>
+    <string name="_00_00">00:00</string>
+    <string name="music_form">Music form</string>
+    <string name="now_playing">Now playing…</string>
+    <string name="empty_string"> </string>
+    <string name="play_all">Play all</string>
+    <string name="div">/</string>
 </resources>

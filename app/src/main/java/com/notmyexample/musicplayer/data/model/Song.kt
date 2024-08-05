@@ -11,6 +11,6 @@ data class Song(
     val duration: Int = 0,
     val thumbnail: Bitmap?,
     val resource: Uri,
-    val isFavorite: Boolean = false,
+    var isFavorite: Boolean = false,
     val albumId: Long
 ) : Serializable
