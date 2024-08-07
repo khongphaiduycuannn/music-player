@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
+    id("kotlin-parcelize")
     id("com.google.dagger.hilt.android")
 }
 
@@ -77,6 +78,9 @@ dependencies {
 
     // Fragment
     implementation(libs.androidx.fragment.ktx)
+
+    // MMKV
+    implementation("com.tencent:mmkv:1.3.9")
 }
 
 kapt {
