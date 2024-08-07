@@ -5,5 +5,6 @@ data class SongUseCases(
     val getAlbums: GetAlbums,
     val favouriteSong: FavouriteSong,
     val saveSearchResult: SaveSearchResult,
-    val getLastSearchResult: GetLastSearchResult
+    val getLastSearchResult: GetLastSearchResult,
+    val deleteSearchResult: DeleteSearchResult
 )

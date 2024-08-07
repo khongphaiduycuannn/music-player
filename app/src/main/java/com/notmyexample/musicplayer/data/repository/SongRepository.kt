@@ -15,4 +15,6 @@ class SongRepository(private val songDataSource: SongDataSource) {
     fun saveSearchResult(song: Song) = songDataSource.saveSearchResult(song)
 
     fun getLastSearchResult() = songDataSource.getLastSearchResult()
+
+    fun deleteSearchResult(song: Song) = songDataSource.deleteSearchResult(song)
 }

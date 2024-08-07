@@ -14,4 +14,6 @@ interface SongDataSource {
     fun saveSearchResult(song: Song)
 
     fun getLastSearchResult(): List<Song>
+
+    fun deleteSearchResult(song: Song)
 }

@@ -11,7 +11,7 @@ import com.tencent.mmkv.MMKV
 
 class SongInMemoryDataSource(
     val context: Context,
-    val kv: MMKV
+    private val kv: MMKV
 ) : SongDataSource {
 
     private val songs by lazy {
@@ -89,6 +89,13 @@ class SongInMemoryDataSource(
     override fun getLastSearchResult(): List<Song> {
         return kv.decodeParcelable(LAST_SEARCH_RESULT, LocalLastSearchResult::class.java)?.data
             ?: listOf()
+    }
+
+    override fun deleteSearchResult(song: Song) {
+        val localLastSearchResult =
+            kv.decodeParcelable(LAST_SEARCH_RESULT, LocalLastSearchResult::class.java)
+        localLastSearchResult?.data?.remove(song)
+        kv.encode(LAST_SEARCH_RESULT, localLastSearchResult)
     }
 
     private val defaultThumbnailList by lazy {

@@ -4,6 +4,7 @@ import android.content.Context
 import com.notmyexample.musicplayer.data.data_source.SongDataSource
 import com.notmyexample.musicplayer.data.data_source.SongInMemoryDataSource
 import com.notmyexample.musicplayer.data.repository.SongRepository
+import com.notmyexample.musicplayer.use_case.song.DeleteSearchResult
 import com.notmyexample.musicplayer.use_case.song.FavouriteSong
 import com.notmyexample.musicplayer.use_case.song.GetAlbums
 import com.notmyexample.musicplayer.use_case.song.GetLastSearchResult
@@ -45,7 +46,8 @@ class SongModule {
             getAlbums = GetAlbums(songRepository),
             favouriteSong = FavouriteSong(songRepository),
             saveSearchResult = SaveSearchResult(songRepository),
-            getLastSearchResult = GetLastSearchResult(songRepository)
+            getLastSearchResult = GetLastSearchResult(songRepository),
+            deleteSearchResult = DeleteSearchResult(songRepository)
         )
     }
 }
