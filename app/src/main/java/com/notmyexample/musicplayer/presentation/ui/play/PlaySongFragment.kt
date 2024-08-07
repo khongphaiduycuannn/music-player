@@ -24,6 +24,7 @@ import com.notmyexample.musicplayer.presentation.navigator.AppNavigator
 import com.notmyexample.musicplayer.presentation.navigator.Screens
 import com.notmyexample.musicplayer.presentation.service.PlaySongManager
 import com.notmyexample.musicplayer.presentation.ui.home.SongAdapter
+import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PAUSE
 import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PLAY
 import com.notmyexample.musicplayer.utils.formatTime
 import dagger.hilt.android.AndroidEntryPoint
@@ -126,7 +127,7 @@ class PlaySongFragment : Fragment() {
                 binding.sbProgress.progress = it
             }
 
-            isPlayingLiveData.observe(viewLifecycleOwner) { setIsPlayingActionView(it) }
+            isPlayingLiveData.observe(viewLifecycleOwner) { setIsPlayingButtonView(it) }
 
             isLoopingLiveData.observe(viewLifecycleOwner) {
                 if (it) {
@@ -151,8 +152,14 @@ class PlaySongFragment : Fragment() {
 
     private val onPlayButtonClick = View.OnClickListener {
         val isPlaying = playSongManager.isPlayingLiveData.value
-        if (isPlaying == true) playSongManager.pauseCurrentSong()
-        else playSongManager.resumeCurrentSong()
+        if (isPlaying == true) {
+            playSongManager.pauseCurrentSong()
+            (activity as MainActivity).startPlaySongService(EVENT_PAUSE)
+        }
+        else {
+            playSongManager.resumeCurrentSong()
+            (activity as MainActivity).startPlaySongService(EVENT_PLAY)
+        }
     }
 
     private val onLoopButtonClick = View.OnClickListener {
@@ -193,7 +200,7 @@ class PlaySongFragment : Fragment() {
         }
     }
 
-    private fun setIsPlayingActionView(isPlaying: Boolean) {
+    private fun setIsPlayingButtonView(isPlaying: Boolean) {
         if (isPlaying) {
             binding.ivPlayOrPause.setImageResource(R.drawable.ic_pause_action)
             startRotateAnim()

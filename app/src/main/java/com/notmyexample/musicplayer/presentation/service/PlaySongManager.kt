@@ -3,7 +3,9 @@ package com.notmyexample.musicplayer.presentation.service
 import android.content.Context
 import android.media.MediaPlayer
 import android.os.Handler
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.notmyexample.musicplayer.data.model.Album
 import com.notmyexample.musicplayer.data.model.Playlist
 import com.notmyexample.musicplayer.data.model.Song
 import com.notmyexample.musicplayer.use_case.song.SongUseCases
@@ -30,8 +32,10 @@ class PlaySongManager @Inject constructor(
     private var mediaPlayer: MediaPlayer? = null
 
     val songsLiveData = MutableLiveData(listOf<Song>())
+    val albumsLiveData = MutableLiveData(listOf<Album>())
     val playlistLiveData = MutableLiveData<Playlist>()
 
+    val currentAlbum = MutableLiveData<Album?>(null)
     val currentPlayLiveData = MutableLiveData<Song?>(null)
     val currentPositionLiveData = MutableLiveData(0)
 
@@ -39,6 +43,7 @@ class PlaySongManager @Inject constructor(
     val isLoopingLiveData = MutableLiveData(false)
 
     private var getSongsJob: Job? = null
+    private var getAlbumsJob: Job? = null
 
     private var handler: Handler? = null
 
@@ -54,6 +59,47 @@ class PlaySongManager @Inject constructor(
         getSongsJob = CoroutineScope(Dispatchers.IO).launch {
             songsLiveData.postValue(songUseCases.getSongs())
         }
+    }
+
+    fun getAlbums() {
+        getAlbumsJob?.cancel()
+
+        getAlbumsJob = CoroutineScope(Dispatchers.IO).launch {
+            albumsLiveData.postValue(songUseCases.getAlbums())
+        }
+    }
+
+    fun setCurrentAlbum(album: Album): Boolean {
+        if (currentAlbum.value != album) {
+            currentAlbum.value = album
+            return true
+        }
+        return false
+    }
+
+    fun setPlaylist(playlist: Playlist) {
+        if (playlistLiveData.value != playlist)
+            playlistLiveData.value = playlist
+    }
+
+    fun shuffleCurrentPlaylist() {
+        playlistLiveData.value?.apply {
+            var shuffledList = originalSongs.shuffled()
+            while (shuffledList == originalSongs)
+                shuffledList = originalSongs.shuffled()
+
+            songs = shuffledList
+            isShuffled = true
+        }
+        playlistLiveData.value = playlistLiveData.value
+    }
+
+    fun unShuffleCurrentPlaylist() {
+        playlistLiveData.value?.apply {
+            songs = originalSongs.toList()
+            isShuffled = false
+        }
+        playlistLiveData.value = playlistLiveData.value
     }
 
     fun playNewSong(song: Song) {
@@ -76,6 +122,12 @@ class PlaySongManager @Inject constructor(
 
         currentPlayLiveData.value = song
         isPlayingLiveData.value = true
+    }
+
+    fun playFirstSongInPlaylist() {
+        playlistLiveData.value?.songs?.let {
+            if (it.isNotEmpty()) playNewSong(it[0])
+        }
     }
 
     fun resumeCurrentSong() {
@@ -113,6 +165,7 @@ class PlaySongManager @Inject constructor(
     fun observeCurrentPosition() {
         if (handler == null) {
             handler = loop(500) {
+                Log.d(TAG, "observeCurrentPosition: ${mediaPlayer?.currentPosition}")
                 mediaPlayer?.let {
                     currentPositionLiveData.value = it.currentPosition
                 }

@@ -1,7 +1,6 @@
 package com.notmyexample.musicplayer.presentation.navigator
 
 import android.os.Bundle
-import java.util.Stack
 
 enum class Screens {
     HOME,

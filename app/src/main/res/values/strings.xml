@@ -16,4 +16,5 @@
     <string name="empty_string"> </string>
     <string name="play_all">Play all</string>
     <string name="div">/</string>
+    <string name="playlist">Playlist</string>
 </resources>

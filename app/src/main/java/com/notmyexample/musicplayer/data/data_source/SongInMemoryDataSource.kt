@@ -41,7 +41,7 @@ class SongInMemoryDataSource(
                 defaultThumbnailList[2],
                 Uri.parse("content://media/external/audio/media/1000000040"),
                 false,
-                3
+                1
             ),
         )
     }
@@ -51,11 +51,13 @@ class SongInMemoryDataSource(
     }
 
     override suspend fun getAlbums(): List<Album> {
-        return listOf(
-            Album(1, "Tuyển tập nhạc Ngot sôi động 2019", "Ngot", defaultThumbnailList[3], 1),
-            Album(2, "Bài hát hay nhất của Thịnh Suy", "Thịnh Suy", defaultThumbnailList[4], 1),
-            Album(3, "Bài hát hay nhất của Vũ", "Vũ.", defaultThumbnailList[5], 1)
+        val result = listOf(
+            Album(1, "Tuyển tập nhạc Ngot sôi động 2019", defaultThumbnailList[3], 0),
+            Album(2, "Bài hát hay nhất của Thịnh Suy", defaultThumbnailList[4], 0),
+            Album(3, "Bài hát hay nhất của Vũ", defaultThumbnailList[5], 0)
         )
+        songs.forEach { result[(it.albumId - 1).toInt()].totalDuration += it.duration }
+        return result
     }
 
     override fun favouriteSong(song: Song): Boolean {

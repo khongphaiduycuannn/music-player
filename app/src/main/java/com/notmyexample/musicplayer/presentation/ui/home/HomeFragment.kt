@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.notmyexample.musicplayer.data.model.Playlist
 import com.notmyexample.musicplayer.databinding.FragmentHomeBinding
@@ -14,7 +13,6 @@ import com.notmyexample.musicplayer.presentation.navigator.AppNavigator
 import com.notmyexample.musicplayer.presentation.navigator.Screens.ALBUM
 import com.notmyexample.musicplayer.presentation.navigator.Screens.DETAIL_ALBUM
 import com.notmyexample.musicplayer.presentation.navigator.Screens.HOME
-import com.notmyexample.musicplayer.presentation.navigator.Screens.PLAY
 import com.notmyexample.musicplayer.presentation.service.PlaySongManager
 import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PLAY
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,9 +31,7 @@ class HomeFragment : Fragment() {
 
     private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
 
-    private val viewModel: HomeViewModel by viewModels()
-
-    private val albumAdapter = AlbumAdapter {
+    private val albumHomeAdapter = AlbumHomeAdapter {
         val bundle = Bundle()
         bundle.putSerializable("Album", it)
         appNavigator.navigateTo(DETAIL_ALBUM, bundle)
@@ -45,7 +41,7 @@ class HomeFragment : Fragment() {
         val songs = playSongManager.songsLiveData.value
         if (songs != null) {
             playSongManager.playNewSong(it)
-            playSongManager.playlistLiveData.value = Playlist("All songs...", songs)
+            playSongManager.setPlaylist(Playlist("All songs...", songs))
         }
 
         (activity as MainActivity).startPlaySongService(EVENT_PLAY)
@@ -69,10 +65,11 @@ class HomeFragment : Fragment() {
 
     private fun initData() {
         playSongManager.getSongs()
+        playSongManager.getAlbums()
     }
 
     private fun initView() {
-        binding.rclAlbumsList.adapter = albumAdapter
+        binding.rclAlbumsList.adapter = albumHomeAdapter
         binding.rclAlbumsList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
@@ -89,7 +86,7 @@ class HomeFragment : Fragment() {
             val songs = playSongManager.songsLiveData.value
             if (songs != null && songs.size > 1) {
                 playSongManager.playNewSong(songs[0])
-                playSongManager.playlistLiveData.value = Playlist("All songs...", songs)
+                playSongManager.setPlaylist(Playlist("All songs...", songs))
 
                 (activity as MainActivity).startPlaySongService(EVENT_PLAY)
             }
@@ -97,22 +94,24 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.albums.observe(viewLifecycleOwner) {
-            albumAdapter.setAlbums(it.take(5).toMutableList())
-        }
-
-        playSongManager.songsLiveData.observe(viewLifecycleOwner) {
-            songAdapter.setSongs(it.toMutableList())
-        }
-
-        playSongManager.currentPlayLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
-                songAdapter.setCurrentSong(it)
+        with(playSongManager) {
+            albumsLiveData.observe(viewLifecycleOwner) {
+                albumHomeAdapter.setAlbums(it.take(5).toMutableList())
             }
-        }
 
-        playSongManager.isPlayingLiveData.observe(viewLifecycleOwner) {
-            songAdapter.setIsPlaying(it)
+            songsLiveData.observe(viewLifecycleOwner) {
+                songAdapter.setSongs(it.toMutableList())
+            }
+
+            currentPlayLiveData.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    songAdapter.setCurrentSong(it)
+                }
+            }
+
+            isPlayingLiveData.observe(viewLifecycleOwner) {
+                songAdapter.setIsPlaying(it)
+            }
         }
     }
 }
