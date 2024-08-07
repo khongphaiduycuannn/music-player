@@ -5,10 +5,13 @@ import android.net.Uri
 import com.bumptech.glide.Glide
 import com.notmyexample.musicplayer.R
 import com.notmyexample.musicplayer.data.model.Album
+import com.notmyexample.musicplayer.data.model.LocalLastSearchResult
 import com.notmyexample.musicplayer.data.model.Song
+import com.tencent.mmkv.MMKV
 
 class SongInMemoryDataSource(
-    val context: Context
+    val context: Context,
+    val kv: MMKV
 ) : SongDataSource {
 
     private val songs by lazy {
@@ -66,6 +69,28 @@ class SongInMemoryDataSource(
         return result.isFavorite
     }
 
+    override fun saveSearchResult(song: Song) {
+        var localLastSearchResult =
+            kv.decodeParcelable(LAST_SEARCH_RESULT, LocalLastSearchResult::class.java)
+        if (localLastSearchResult == null)
+            localLastSearchResult = LocalLastSearchResult(mutableListOf())
+
+        if (localLastSearchResult.data.size < 3) {
+            localLastSearchResult.data += song
+        } else {
+            localLastSearchResult.data[0] = localLastSearchResult.data[1]
+            localLastSearchResult.data[1] = localLastSearchResult.data[2]
+            localLastSearchResult.data[2] = song
+        }
+
+        kv.encode(LAST_SEARCH_RESULT, localLastSearchResult)
+    }
+
+    override fun getLastSearchResult(): List<Song> {
+        return kv.decodeParcelable(LAST_SEARCH_RESULT, LocalLastSearchResult::class.java)?.data
+            ?: listOf()
+    }
+
     private val defaultThumbnailList by lazy {
         arrayOf(
             loadThumbnail(R.drawable.img_thumbnail_1),
@@ -83,4 +108,8 @@ class SongInMemoryDataSource(
         .load(thumbnail)
         .submit(512, 512)
         .get()
+
+    companion object {
+        const val LAST_SEARCH_RESULT = "last_search_result"
+    }
 }

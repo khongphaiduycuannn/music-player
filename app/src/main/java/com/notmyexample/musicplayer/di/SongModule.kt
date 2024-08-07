@@ -6,8 +6,11 @@ import com.notmyexample.musicplayer.data.data_source.SongInMemoryDataSource
 import com.notmyexample.musicplayer.data.repository.SongRepository
 import com.notmyexample.musicplayer.use_case.song.FavouriteSong
 import com.notmyexample.musicplayer.use_case.song.GetAlbums
+import com.notmyexample.musicplayer.use_case.song.GetLastSearchResult
 import com.notmyexample.musicplayer.use_case.song.GetSongs
+import com.notmyexample.musicplayer.use_case.song.SaveSearchResult
 import com.notmyexample.musicplayer.use_case.song.SongUseCases
+import com.tencent.mmkv.MMKV
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,8 +24,11 @@ class SongModule {
 
     @Provides
     @Singleton
-    fun provideDataSource(@ApplicationContext context: Context): SongDataSource {
-        return SongInMemoryDataSource(context)
+    fun provideDataSource(
+        @ApplicationContext context: Context,
+        kv: MMKV
+    ): SongDataSource {
+        return SongInMemoryDataSource(context, kv)
     }
 
     @Provides
@@ -37,7 +43,9 @@ class SongModule {
         return SongUseCases(
             getSongs = GetSongs(songRepository),
             getAlbums = GetAlbums(songRepository),
-            favouriteSong = FavouriteSong(songRepository)
+            favouriteSong = FavouriteSong(songRepository),
+            saveSearchResult = SaveSearchResult(songRepository),
+            getLastSearchResult = GetLastSearchResult(songRepository)
         )
     }
 }

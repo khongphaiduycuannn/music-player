@@ -10,4 +10,8 @@ interface SongDataSource {
     suspend fun getAlbums(): List<Album>
 
     fun favouriteSong(song: Song): Boolean
+
+    fun saveSearchResult(song: Song)
+
+    fun getLastSearchResult(): List<Song>
 }
