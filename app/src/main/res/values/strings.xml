@@ -18,4 +18,5 @@
     <string name="div">/</string>
     <string name="playlist">Playlist</string>
     <string name="recent_searches">Recent searches</string>
+    <string name="sort_by">Sort by</string>
 </resources>

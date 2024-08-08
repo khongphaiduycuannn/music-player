@@ -7,6 +7,7 @@ import com.notmyexample.musicplayer.data.repository.SongRepository
 import com.notmyexample.musicplayer.use_case.song.DeleteSearchResult
 import com.notmyexample.musicplayer.use_case.song.FavouriteSong
 import com.notmyexample.musicplayer.use_case.song.GetAlbums
+import com.notmyexample.musicplayer.use_case.song.GetFavouriteSongs
 import com.notmyexample.musicplayer.use_case.song.GetLastSearchResult
 import com.notmyexample.musicplayer.use_case.song.GetSongs
 import com.notmyexample.musicplayer.use_case.song.SaveSearchResult
@@ -47,7 +48,8 @@ class SongModule {
             favouriteSong = FavouriteSong(songRepository),
             saveSearchResult = SaveSearchResult(songRepository),
             getLastSearchResult = GetLastSearchResult(songRepository),
-            deleteSearchResult = DeleteSearchResult(songRepository)
+            deleteSearchResult = DeleteSearchResult(songRepository),
+            getFavouriteSongs = GetFavouriteSongs(songRepository)
         )
     }
 }

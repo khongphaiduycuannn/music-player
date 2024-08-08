@@ -26,6 +26,10 @@ class AlbumAdapter(
             binding.tvSongs.text = "${getAlbumSongs(item.id)}"
             Glide.with(binding.ivThumbnail.context).load(item.thumbnail).into(binding.ivThumbnail)
         }
+
+        fun handleEvent(item: Album) {
+            binding.lnlAlbum.setOnClickListener { onClick(item) }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
@@ -38,6 +42,7 @@ class AlbumAdapter(
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         holder.onBind(albums[position])
+        holder.handleEvent(albums[position])
     }
 
     fun setAlbums(newList: MutableList<Album>) {

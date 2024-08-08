@@ -15,7 +15,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.notmyexample.musicplayer.R
-import com.notmyexample.musicplayer.data.model.Playlist
 import com.notmyexample.musicplayer.data.model.Song
 import com.notmyexample.musicplayer.databinding.FragmentPlaySongBinding
 import com.notmyexample.musicplayer.presentation.MainActivity
@@ -24,8 +23,8 @@ import com.notmyexample.musicplayer.presentation.navigator.AppNavigator
 import com.notmyexample.musicplayer.presentation.navigator.Screens
 import com.notmyexample.musicplayer.presentation.service.PlaySongManager
 import com.notmyexample.musicplayer.presentation.ui.home.SongAdapter
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PAUSE
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PLAY
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_PAUSE
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_PLAY
 import com.notmyexample.musicplayer.utils.formatTime
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

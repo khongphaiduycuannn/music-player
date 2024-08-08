@@ -9,12 +9,12 @@ import androidx.core.app.NotificationCompat
 import com.notmyexample.musicplayer.R
 import com.notmyexample.musicplayer.presentation.MainActivity
 import com.notmyexample.musicplayer.presentation.service.NotificationManager.Companion.CHANNEL_ID
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_CLOSE
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_NAME
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_NEXT_MUSIC
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PAUSE
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PLAY
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PREVIOUS_MUSIC
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_CLOSE
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_NAME
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_NEXT_MUSIC
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_PAUSE
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_PLAY
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_PREVIOUS_MUSIC
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

@@ -85,7 +85,7 @@ class PlaySongManager @Inject constructor(
     fun shuffleCurrentPlaylist() {
         playlistLiveData.value?.apply {
             var shuffledList = originalSongs.shuffled()
-            while (shuffledList == originalSongs)
+            while (shuffledList == originalSongs && shuffledList.size > 1)
                 shuffledList = originalSongs.shuffled()
 
             songs = shuffledList

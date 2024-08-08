@@ -31,9 +31,9 @@ import com.notmyexample.musicplayer.presentation.navigator.Screens.SEARCH
 import com.notmyexample.musicplayer.presentation.navigator.Screens.SONGS
 import com.notmyexample.musicplayer.presentation.service.PlaySongManager
 import com.notmyexample.musicplayer.presentation.service.PlaySongService
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_NAME
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PAUSE
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PLAY
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_NAME
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_PAUSE
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_PLAY
 import com.notmyexample.musicplayer.utils.formatTime
 import com.notmyexample.musicplayer.utils.requestPermission
 import com.notmyexample.musicplayer.utils.requestPermissions

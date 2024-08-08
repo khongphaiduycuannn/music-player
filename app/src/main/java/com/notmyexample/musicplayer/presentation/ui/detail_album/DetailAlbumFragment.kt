@@ -19,8 +19,8 @@ import com.notmyexample.musicplayer.presentation.navigator.AppNavigator
 import com.notmyexample.musicplayer.presentation.navigator.Screens.DETAIL_ALBUM
 import com.notmyexample.musicplayer.presentation.service.PlaySongManager
 import com.notmyexample.musicplayer.presentation.ui.home.SongAdapter
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PAUSE
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PLAY
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_PAUSE
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_PLAY
 import com.notmyexample.musicplayer.utils.darkenColor
 import com.notmyexample.musicplayer.utils.formatTime
 import com.notmyexample.musicplayer.utils.getDominantColor

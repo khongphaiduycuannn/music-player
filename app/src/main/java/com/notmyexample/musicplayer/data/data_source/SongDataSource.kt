@@ -7,6 +7,8 @@ interface SongDataSource {
 
     suspend fun getSongs(): List<Song>
 
+    suspend fun getFavouriteSongs(): List<Song>
+
     suspend fun getAlbums(): List<Album>
 
     fun favouriteSong(song: Song): Boolean

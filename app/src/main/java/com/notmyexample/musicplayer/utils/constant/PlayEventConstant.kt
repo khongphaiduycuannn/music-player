@@ -1,6 +1,6 @@
 package com.notmyexample.musicplayer.utils.constant
 
-object PlayEventEConstant {
+object PlayEventConstant {
     const val EVENT_NAME = "event"
     const val EVENT_PLAY = 1
     const val EVENT_PAUSE = 2

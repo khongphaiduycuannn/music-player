@@ -14,7 +14,7 @@ import com.notmyexample.musicplayer.presentation.navigator.Screens.ALBUM
 import com.notmyexample.musicplayer.presentation.navigator.Screens.DETAIL_ALBUM
 import com.notmyexample.musicplayer.presentation.navigator.Screens.HOME
 import com.notmyexample.musicplayer.presentation.service.PlaySongManager
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PLAY
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_PLAY
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

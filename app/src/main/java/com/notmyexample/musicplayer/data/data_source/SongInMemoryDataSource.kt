@@ -53,6 +53,10 @@ class SongInMemoryDataSource(
         return songs
     }
 
+    override suspend fun getFavouriteSongs(): List<Song> {
+        return songs.filter { it.isFavorite }
+    }
+
     override suspend fun getAlbums(): List<Album> {
         val result = listOf(
             Album(1, "Tuyển tập nhạc Ngot sôi động 2019", defaultThumbnailList[3], 0),

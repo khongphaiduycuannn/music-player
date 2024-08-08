@@ -5,16 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.notmyexample.musicplayer.databinding.FragmentSongsBinding
 import com.notmyexample.musicplayer.presentation.MainActivity
-import com.notmyexample.musicplayer.presentation.SharedViewModel
 import com.notmyexample.musicplayer.presentation.navigator.AppNavigator
 import com.notmyexample.musicplayer.presentation.navigator.Screens
 import com.notmyexample.musicplayer.presentation.service.PlaySongManager
 import com.notmyexample.musicplayer.presentation.ui.home.SongAdapter
-import com.notmyexample.musicplayer.utils.constant.PlayEventEConstant.EVENT_PLAY
+import com.notmyexample.musicplayer.utils.constant.PlayEventConstant.EVENT_PLAY
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
