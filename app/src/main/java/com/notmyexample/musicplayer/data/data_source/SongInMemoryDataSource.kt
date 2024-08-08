@@ -75,18 +75,22 @@ class SongInMemoryDataSource(
         if (localLastSearchResult == null)
             localLastSearchResult = LocalLastSearchResult(mutableListOf())
 
+        localLastSearchResult.data.forEach {
+            if (song.id == it) return
+        }
+
         if (localLastSearchResult.data.size < 3) {
-            localLastSearchResult.data += song
+            localLastSearchResult.data += song.id
         } else {
             localLastSearchResult.data[0] = localLastSearchResult.data[1]
             localLastSearchResult.data[1] = localLastSearchResult.data[2]
-            localLastSearchResult.data[2] = song
+            localLastSearchResult.data[2] = song.id
         }
 
         kv.encode(LAST_SEARCH_RESULT, localLastSearchResult)
     }
 
-    override fun getLastSearchResult(): List<Song> {
+    override fun getLastSearchResult(): List<Long> {
         return kv.decodeParcelable(LAST_SEARCH_RESULT, LocalLastSearchResult::class.java)?.data
             ?: listOf()
     }
@@ -94,7 +98,7 @@ class SongInMemoryDataSource(
     override fun deleteSearchResult(song: Song) {
         val localLastSearchResult =
             kv.decodeParcelable(LAST_SEARCH_RESULT, LocalLastSearchResult::class.java)
-        localLastSearchResult?.data?.remove(song)
+        localLastSearchResult?.data?.remove(song.id)
         kv.encode(LAST_SEARCH_RESULT, localLastSearchResult)
     }
 

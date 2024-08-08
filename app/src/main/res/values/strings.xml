@@ -17,4 +17,5 @@
     <string name="play_all">Play all</string>
     <string name="div">/</string>
     <string name="playlist">Playlist</string>
+    <string name="recent_searches">Recent searches</string>
 </resources>

@@ -5,5 +5,5 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class LocalLastSearchResult(
-    val data: MutableList<Song>
+    val data: MutableList<Long>
 ) : Parcelable

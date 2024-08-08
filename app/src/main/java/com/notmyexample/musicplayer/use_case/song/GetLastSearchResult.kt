@@ -6,5 +6,5 @@ data class GetLastSearchResult(
     private val songRepository: SongRepository
 ) {
 
-    operator fun invoke() = songRepository.getLastSearchResult()
+    operator fun invoke(): List<Long> = songRepository.getLastSearchResult()
 }

@@ -165,7 +165,6 @@ class PlaySongManager @Inject constructor(
     fun observeCurrentPosition() {
         if (handler == null) {
             handler = loop(500) {
-                Log.d(TAG, "observeCurrentPosition: ${mediaPlayer?.currentPosition}")
                 mediaPlayer?.let {
                     currentPositionLiveData.value = it.currentPosition
                 }

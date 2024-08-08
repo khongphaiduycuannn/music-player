@@ -13,7 +13,7 @@ interface SongDataSource {
 
     fun saveSearchResult(song: Song)
 
-    fun getLastSearchResult(): List<Song>
+    fun getLastSearchResult(): List<Long>
 
     fun deleteSearchResult(song: Song)
 }
