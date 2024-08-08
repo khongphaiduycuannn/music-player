@@ -9,6 +9,7 @@ import com.notmyexample.musicplayer.data.model.Song
 import com.notmyexample.musicplayer.databinding.ItemRecentSearchBinding
 
 class RecentSearchAdapter(
+    private val onClick: (Song) -> Unit = {},
     private val onDelete: (Song) -> Unit = {}
 ) : Adapter<RecentSearchAdapter.RecentSearchViewHolder>() {
 
@@ -24,9 +25,8 @@ class RecentSearchAdapter(
         }
 
         fun handleEvent(song: Song) {
-            binding.ivDelete.setOnClickListener {
-                onDelete(song)
-            }
+            binding.lnlSong.setOnClickListener { onClick(song) }
+            binding.ivDelete.setOnClickListener { onDelete(song) }
         }
     }
 
@@ -53,6 +53,8 @@ class RecentSearchAdapter(
     private fun notifyDataSetChange(list: MutableList<Song>, newList: MutableList<Song>) {
         val diff = newList.size - list.size
         when (diff) {
+            0 -> {}
+
             1 -> notifyItemInserted(newList.size - 1)
 
             -1 -> {

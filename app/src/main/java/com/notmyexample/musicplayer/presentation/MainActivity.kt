@@ -75,7 +75,13 @@ class MainActivity : AppCompatActivity() {
         binding.lnlFavouriteNav.setOnClickListener { appNavigator.navigateTo(FAVOURITE) }
 
         binding.cslBottomPlayBar.setOnClickListener {
-            appNavigator.navigateTo(PLAY)
+            appNavigator.navigateTo(
+                PLAY,
+                R.anim.enter_from_bottom,
+                R.anim.anim_nothing,
+                R.anim.anim_nothing,
+                R.anim.exit_to_bottom
+            )
         }
 
         binding.ivPlayOrPause.setOnClickListener {

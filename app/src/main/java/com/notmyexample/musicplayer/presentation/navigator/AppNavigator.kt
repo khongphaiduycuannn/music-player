@@ -20,6 +20,8 @@ interface AppNavigator {
 
     fun navigateTo(screen: Screens, bundle: Bundle)
 
+    fun navigateTo(screen: Screens, enter: Int, exit: Int, popEnter: Int, popExit: Int)
+
     fun popBackStack()
 
     fun popBackStack(onEmptyStack: () -> Unit)

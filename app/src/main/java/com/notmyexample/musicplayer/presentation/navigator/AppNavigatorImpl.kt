@@ -38,6 +38,18 @@ class AppNavigatorImpl @Inject constructor(private val activity: FragmentActivit
         screenStack.push(screen)
     }
 
+    override fun navigateTo(
+        screen: Screens,
+        enter: Int,
+        exit: Int,
+        popEnter: Int,
+        popExit: Int
+    ) {
+        val fragment = getFragment(screen)
+        startFragment(fragment, screen, enter, exit, popEnter, popExit)
+        screenStack.push(screen)
+    }
+
     override fun popBackStack() {
         activity.supportFragmentManager.popBackStack()
         screenStack.pop()
@@ -64,7 +76,14 @@ class AppNavigatorImpl @Inject constructor(private val activity: FragmentActivit
         Screens.ALBUM -> AlbumFragment()
     }
 
-    private fun startFragment(fragment: Fragment, screen: Screens) {
+    private fun startFragment(
+        fragment: Fragment,
+        screen: Screens,
+        enter: Int = R.anim.enter_zoom_in,
+        exit: Int = R.anim.exit_zoom_out,
+        popEnter: Int = R.anim.enter_zoom_out,
+        popExit: Int = R.anim.exit_zoom_in
+    ) {
         activity.supportFragmentManager.beginTransaction().apply {
             if (fromMainBackstack(screen)) {
                 addToBackStack(HOME_BACKSTACK)
@@ -81,12 +100,7 @@ class AppNavigatorImpl @Inject constructor(private val activity: FragmentActivit
                 )
             }
 
-            setCustomAnimations(
-                R.anim.enter_zoom_in,
-                R.anim.exit_zoom_out,
-                R.anim.enter_zoom_out,
-                R.anim.exit_zoom_in
-            )
+            setCustomAnimations(enter, exit, popEnter, popExit)
             replace(R.id.fragmentContainerView, fragment)
             setReorderingAllowed(true)
             commit()

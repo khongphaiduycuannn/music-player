@@ -41,9 +41,18 @@ class SearchFragment : Fragment() {
         (activity as MainActivity).startPlaySongService(EVENT_PLAY)
     }
 
-    private val recentSearchResultAdapter = RecentSearchAdapter {
-        viewModel.deleteSearchResult(it)
-    }
+    private val recentSearchResultAdapter = RecentSearchAdapter(
+        onClick = {
+            playSongManager.playNewSong(it)
+            playSongManager.setPlaylist(Playlist("Selected song...", listOf(it)))
+            viewModel.saveSearchResult(it)
+
+            (activity as MainActivity).startPlaySongService(EVENT_PLAY)
+        },
+        onDelete = {
+            viewModel.deleteSearchResult(it)
+        }
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
