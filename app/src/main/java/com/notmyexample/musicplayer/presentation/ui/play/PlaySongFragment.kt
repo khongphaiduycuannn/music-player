@@ -1,6 +1,8 @@
 package com.notmyexample.musicplayer.presentation.ui.play
 
 import android.animation.ObjectAnimator
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -111,6 +113,11 @@ class PlaySongFragment : Fragment() {
         binding.ivFavourite.setOnClickListener { playSongManager.favouriteCurrentSong() }
 
         binding.ivInformation.setOnClickListener { Log.d(TAG, "handleEvent: ${playSongManager.songsLiveData.value}") }
+
+        binding.ivShare.setOnClickListener {
+            val currentPlay = playSongManager.currentPlayLiveData.value
+            openShareSheet(currentPlay?.resource)
+        }
     }
 
     private fun observeData() {
@@ -181,6 +188,15 @@ class PlaySongFragment : Fragment() {
         override fun onStopTrackingTouch(p0: SeekBar?) {
 
         }
+    }
+
+    private fun openShareSheet(resource: Uri?) {
+        val shareIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_STREAM, resource)
+            type = "audio/mpeg"
+        }
+        startActivity(Intent.createChooser(shareIntent, null))
     }
 
     private fun setSongDataView(song: Song?) {
