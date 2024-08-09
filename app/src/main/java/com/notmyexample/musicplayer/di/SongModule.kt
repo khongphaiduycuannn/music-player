@@ -2,7 +2,7 @@ package com.notmyexample.musicplayer.di
 
 import android.content.Context
 import com.notmyexample.musicplayer.data.data_source.SongDataSource
-import com.notmyexample.musicplayer.data.data_source.SongInMemoryDataSource
+import com.notmyexample.musicplayer.data.data_source.SongLocalDataSource
 import com.notmyexample.musicplayer.data.repository.SongRepository
 import com.notmyexample.musicplayer.use_case.song.DeleteSearchResult
 import com.notmyexample.musicplayer.use_case.song.FavouriteSong
@@ -30,7 +30,8 @@ class SongModule {
         @ApplicationContext context: Context,
         kv: MMKV
     ): SongDataSource {
-        return SongInMemoryDataSource(context, kv)
+//        return SongInMemoryDataSource(context, kv)
+        return SongLocalDataSource(context, kv)
     }
 
     @Provides
